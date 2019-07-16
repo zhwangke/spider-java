@@ -18,7 +18,7 @@ public class NewsDao extends JdbcTemplate {
 
         try {
             dataSource.setDriverClass("com.mysql.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql:///news"); // 需要更改为自己的数据库名称
+            dataSource.setJdbcUrl("jdbc:mysql:///News?characterEncoding=utf-8"); // 需要更改为自己的数据库名称
             dataSource.setUser("root");
             dataSource.setPassword("123"); // 需要更改为自己的mysql的密码
         } catch (PropertyVetoException e) {
@@ -32,6 +32,6 @@ public class NewsDao extends JdbcTemplate {
     // 保存数据的方法
     public void saveNews(News news) {
         String[] params = {news.getId(), news.getTitle(), news.getTime(), news.getSource(), news.getContent(), news.getEditor(), news.getDocurl()};
-        update("INSERT  INTO  news VALUES (?,?,?,?,?,?,?)", params);
+        update("INSERT INTO news VALUES (?,?,?,?,?,?,?)", params);
     }
 }
