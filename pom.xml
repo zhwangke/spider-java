@@ -12,6 +12,7 @@
         <module>spider-basic</module>
         <module>spider-news</module>
         <module>spider-movie</module>
+        <module>spiderdeploy</module>
     </modules>
     <dependencies>
 
@@ -58,5 +59,34 @@
         </dependency>
 
     </dependencies>
+    <build>
+        <plugins>
+            <!--这是jdk编译的插件默认: 1.5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+            <!--打包的插件-->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest> <!-- 注意 此为设置程序的主入口-->
+                            <mainClass>com.ent163.PublicDaoNode</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
