@@ -13,6 +13,7 @@
         <module>spider-news</module>
         <module>spider-movie</module>
         <module>spiderdeploy</module>
+        <module>search-lucene</module>
     </modules>
     <dependencies>
 
@@ -57,6 +58,42 @@
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version>4.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queries</artifactId>
+            <version>4.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-test-framework</artifactId>
+            <version>4.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>4.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version>4.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-highlighter</artifactId>
+            <version>4.10.2</version>
+        </dependency>
+        <!-- 引入IK分词器 -->
+        <dependency>
+            <groupId>com.janeluo</groupId>
+            <artifactId>ikanalyzer</artifactId>
+            <version>2012_u6</version>
+        </dependency>
 
     </dependencies>
     <build>
@@ -78,7 +115,7 @@
                 <configuration>
                     <archive>
                         <manifest> <!-- 注意 此为设置程序的主入口-->
-                            <mainClass>com.ent163.PublicDaoNode</mainClass>
+                            <mainClass>CsdnSpider</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
