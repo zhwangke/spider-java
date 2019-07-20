@@ -14,6 +14,7 @@
         <module>spider-movie</module>
         <module>spiderdeploy</module>
         <module>search-lucene</module>
+        <module>search-solr</module>
     </modules>
     <dependencies>
 
@@ -93,6 +94,18 @@
             <groupId>com.janeluo</groupId>
             <artifactId>ikanalyzer</artifactId>
             <version>2012_u6</version>
+        </dependency>
+        <!-- 4.0搜索引擎之solr -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>4.10.2</version>
+        </dependency>
+        <!--日志的包, solrj执行需要一个日志包-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+            <version>1.1</version>
         </dependency>
 
     </dependencies>
