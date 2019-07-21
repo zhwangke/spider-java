@@ -43,15 +43,17 @@
 
 
 5.[search_solrCLoud](https://github.com/zhwangke/spider-java/blob/master/resources/05-search-solrCloud/%E5%A8%B1%E4%B9%90%E5%A4%B4%E6%9D%A1_search_solr-cloud.md)
-* solr的基本概念
-* solr的部署 :
-* solr的管理界面
-* solr的配置文件:  3个
-* solr的客户端工具 :  solrj
-  * solrj完成对solr的索引库的CURD
-  * solrj完成高级的内容:
-    * 高亮
-    * 排序
-    * 分页
+* solrCloud :  solr的集群
+  * 什么是solrCLoud:  什么时候需要使用solrCloud
+  * solrCloud的结构 :
+  * solrCloud集群的数据的读取和分裂的流程
+* solrCloud的部署 :   能够参考文档搭建成功
+  * zookeeper集群
+  * solrCLoud的集群
+* solrCloud的管理命令 :   将其记录好, 用的时候打开复制
+* 使用solrj完成对solrCloud的操作 : 会操作
+* dubbox:
+  * 为什么要使用dubbox, 基本概念  :  理解
+  * dubbox基本使用  :  dubbox的功能的体验
 
 
