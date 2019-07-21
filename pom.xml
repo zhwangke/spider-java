@@ -15,6 +15,8 @@
         <module>spiderdeploy</module>
         <module>search-lucene</module>
         <module>search-solr</module>
+        <module>searchsolrCloud</module>
+        <module>search-solrCloud</module>
     </modules>
     <dependencies>
 
@@ -102,6 +104,17 @@
             <version>4.10.2</version>
         </dependency>
         <!--日志的包, solrj执行需要一个日志包-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging-api</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <!-- search_solrCLoud集群依赖 -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>4.10.2</version>
+        </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging-api</artifactId>
