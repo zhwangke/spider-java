@@ -15,7 +15,6 @@
         <module>spiderdeploy</module>
         <module>search-lucene</module>
         <module>search-solr</module>
-        <module>searchsolrCloud</module>
         <module>search-solrCloud</module>
     </modules>
     <dependencies>
@@ -141,7 +140,7 @@
                 <configuration>
                     <archive>
                         <manifest> <!-- 注意 此为设置程序的主入口-->
-                            <mainClass>CsdnSpider</mainClass>
+                            <mainClass>viewCount.CsdnViewSpider</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

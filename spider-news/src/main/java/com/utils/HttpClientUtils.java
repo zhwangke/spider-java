@@ -1,5 +1,6 @@
 package com.utils;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -8,11 +9,13 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import redis.clients.jedis.Jedis;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +32,7 @@ public class HttpClientUtils {
         connectionManager.setMaxTotal(200);
         //定义主机的最大的并发数
         connectionManager.setDefaultMaxPerRoute(20);
+        initIp();
     }
 
     //获取closeHttpClient
@@ -38,7 +42,36 @@ public class HttpClientUtils {
 
         return httpClient;
     }
+    private static CloseableHttpClient getProxyHttpClient() {
 
+        // 从redis中获取代理IP
+        Jedis conn = JedisUtils.getJedis();
+        // 从右边弹出一个元素之后，从新放回左边
+        List<String> ipkv = conn.brpop(0, "spider:ip");
+        // CloseableHttpClient httpClient = getHttpClient();
+        String[] vals = ipkv.get(0).split(":");
+        System.out.println(vals);
+        HttpHost proxy = new HttpHost(vals[0], Integer.parseInt(vals[1]));
+        DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
+        return HttpClients.custom().setConnectionManager(connectionManager).setRoutePlanner(routePlanner).build();
+    }
+    private static void initIp() {
+        try {
+            Jedis conn = JedisUtils.getJedis();
+            BufferedReader bufferedReader = null;
+            bufferedReader = new BufferedReader(
+                    new FileReader(new File("C:\\Users\\maoxiangyi\\Desktop\\Proxies2018-06-06.txt")));
+            String line = null;
+            while ((line=bufferedReader.readLine())!=null) {
+                conn.lpush("spider:ip", line);
+            }
+            bufferedReader.close();
+            conn.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        }
+    }
 
     //执行请求返回HTML页面
     private static String execute(HttpRequestBase httpRequestBase) throws IOException {
