@@ -24,6 +24,7 @@ public class News163Slave {
     private static IdWorker idWorker  = new IdWorker(1,1);
     public static void main(String[] args) throws Exception {
         while (true) {
+
             //1.从redis中获取docurl
             Jedis jedis = JedisUtils.getJedis();
 
@@ -36,6 +37,7 @@ public class News163Slave {
                 break;
             }
             String docurl = list.get(1);
+
             //2. 根据url解析商品的详情页 封装成news对象
             News news = parseNewsItem(docurl);
 
@@ -53,6 +55,7 @@ public class News163Slave {
     // 根据url 解析新闻详情页:
     private static News parseNewsItem(String docUrl) throws Exception {
         System.out.println(docUrl);
+
         //  3.3.1 发送请求, 获取新闻详情页数据
         String html = HttpClientUtils.doGet(docUrl);
 
@@ -90,7 +93,6 @@ public class News163Slave {
         //3.3.2.7: id
         long id = idWorker.nextId();
         news.setId(id + "");
-
         return news;
     }
 }

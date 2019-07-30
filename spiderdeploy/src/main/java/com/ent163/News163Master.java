@@ -113,9 +113,13 @@ public class News163Master {
             if(docUrl.contains("c.m.163.com")){
                 continue;
             }
+            if(docUrl.contains("live.163.com")){
+                continue;
+            }
             if(docUrl.contains("dy.163.com")){
                 continue;
             }
+
             // ###################去重处理代码######################
             Jedis jedis = JedisUtils.getJedis();
             Boolean flag = jedis.sismember("bigData:spider:docurl", docUrl);

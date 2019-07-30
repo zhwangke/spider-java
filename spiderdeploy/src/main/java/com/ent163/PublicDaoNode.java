@@ -8,6 +8,7 @@ package com.ent163;
 import com.dao.NewsDao;
 import com.domain.News;
 import com.google.gson.Gson;
+import com.producer.KafkaSpiderProducer;
 import com.utils.JedisUtils;
 import redis.clients.jedis.Jedis;
 
@@ -18,6 +19,9 @@ import java.util.List;
 //       5) 将docurl存储到redis的去重的set集合中   6) 循环
 public class PublicDaoNode {
     private static NewsDao newsDao = new NewsDao();
+    //创建生产者对象
+    private static KafkaSpiderProducer kafkaSpiderProducer = new KafkaSpiderProducer();
+
 
     public static void main(String[] args) {
 
@@ -46,6 +50,8 @@ public class PublicDaoNode {
             //4) 保存数据
 
             newsDao.saveNews(news);
+            // 在添加完数据库后, 添加此代码
+            kafkaSpiderProducer.saveSpiderTokafka(newsJson);
 
             // 5)  将docurl存储到redis的去重的set集合中
             jedis = JedisUtils.getJedis();
